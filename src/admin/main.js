@@ -10,23 +10,37 @@ Hull.component({
   events: {
     'submit form' : function(e) {
       e && e.preventDefault();
-      var data = this.sandbox.dom.getFormData(e.currentTarget)
-      console.warn("YEAH !", data);
-    }
-  },
-
-  actions: {
-    selectAchievement: function(event, action) {
       var self = this;
-      this.api(action.data.id).then(function(achievement) {
-        var res = self.renderTemplate('form', { achievement: achievement });
-        self.$formContainer.html(res);
+      var data = this.sandbox.dom.getFormData(e.currentTarget)
+      this.api.post('app/achievements', data).then(function () {
+        self.template = 'main';
+        self.data.error = undefined;
+        self.refresh();
+      }, function (err) {
+        self.data.error = err.message;
+        self.refresh();
       });
     }
   },
 
-  beforeRender: function(data) {
-    console.warn(data)
+  actions: {
+    showRaw: function () {
+      var rawContainer = this.$el.find('pre.raw');
+      rawContainer.removeClass('hidden');
+      rawContainer.html(JSON.stringify(this.data.achievement, null, 2));
+    },
+    createAchievement: function () {
+      this.template = 'form';
+      this.refresh();
+    },
+    selectAchievement: function(event, action) {
+      var self = this;
+      this.api(action.data.id).then(function(achievement) {
+        self.template = 'form';
+        self.data.achievement = achievement;
+        self.refresh();
+      });
+    }
   },
 
   afterRender: function() {

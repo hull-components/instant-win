@@ -1,0 +1,23 @@
+<form class="row form form-inline">
+  <div class="input-group">
+    {{#if achievements}}
+      <select class="form-control">
+        <option value="">Please select a game</option>
+        {{#each achievements}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+      <div class="input-group-btn">
+        <input type="submit" class="btn btn-primary" data-hull-action="selectGame" value="Show">
+      </div>
+    {{/if}}
+    {{#unless achievements}}
+      <select disabled="disabled" class="form-control">
+        <option value="">Create a game first</option>
+      </select>
+      <div class="input-group-btn">
+        <input type="submit" class="disabled btn btn-primary" data-hull-action="selectGame" value="Show">
+      </div>
+    {{/unless}}
+  </div>
+</form>

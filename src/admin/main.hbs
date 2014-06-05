@@ -1,9 +1,29 @@
 <div class="row">
-  <ul class="md-col-4 list-group">
+  <ul class="col-md-12 list-group">
+    {{#unless achievements}}
+      <li class="list-group-item">
+       <em>No achievements for the current app</em>
+      </li>
+    {{/unless}}
     {{#each achievements}}
-    <li class="list-group-item"><a href="#" data-hull-action="selectAchievement" data-hull-id="{{id}}">{{name}} ({{type}})</a></li>
+    <li class="list-group-item">
+      <a href="#" data-hull-action="selectAchievement" data-hull-id="{{id}}">
+        {{name}}
+        <span class="pull-right"><small>{{type}}</small></span>
+      </a>
+    </li>
     {{/each}}
   </ul>
-  <div class="md-col-8" data-hull-achievement-form>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <a class="btn btn-primary btn-block" data-hull-action="importAchievement">
+      Import Achievements from CSV
+    </a>
+  </div>
+  <div class="col-md-4 pull-right">
+    <a class="btn btn-primary btn-block" data-hull-action="createAchievement">
+      Create an achievement
+    </a>
   </div>
 </div>
