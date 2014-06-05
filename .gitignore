@@ -1,0 +1,7 @@
+.DS_Store
+.grunt
+tmp
+node_modules
+config.json
+dist
+config.yml

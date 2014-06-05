@@ -1,0 +1,22 @@
+{
+  "name": "hull-components/instant-win",
+  "version": "0.0.1",
+  "authors": [
+    "Stephane Bellity <stephane@hull.io>"
+  ],
+  "description": "Simple game based on Hull's InstantWin API",
+  "keywords": [
+    "hull",
+    "component",
+    "game"
+  ],
+  "license": "MIT",
+  "homepage": "http://hull-components.github.io",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
