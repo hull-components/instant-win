@@ -157,3 +157,20 @@ Hull.api.post('app/achievements', instant, function(achievement) {
 ```
 
 
+## Usage
+
+To install this app locally and customize it, you need to clone this repo, install, and run [grunt](http://gruntjs.com/).
+
+```
+git clone https://github.com/hull-components/instant-win.git
+cd intant-win
+npm install -g grunt-cli
+npm install
+grunt --dev
+open http://localhost:8000
+```
+
+The components will then be built in the 'dist/' folder.
+
+All sources are inside the 'src/' folder.
+
