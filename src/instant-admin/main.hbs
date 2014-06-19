@@ -1,0 +1,44 @@
+{{#isAdmin}}
+<form role="form">
+  <h3>Update an InstantWin</h3>
+
+  <div class="form-group">
+    <label for="hull-achievement-id">Select a InstantWin to Edit: </label>
+    <select id="hull-achievement-id" name="id">
+      {{#each achievements}}
+        <option value="{{this.id}}">{{this.name}} - {{this.id}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="hull-instant-admin__section">
+    <div class="form-group">
+      <label for="hull-instant-update-name">Name: </label>
+      <input class='form-control input-block-level' id="hull-instant-update-name" name="name" type="text"/>
+    </div>
+
+    <div class="form-group">
+      <label for="hull-instant-update-description">Description: </label>
+      <input class='form-control input-block-level' id="hull-instant-update-description" name="description" type="text"/>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-primary" data-hull-action="updateAchievement">Update Achievement</button>
+    </div>
+  </div>
+</div>
+
+<div class="well">
+  <div class="form-group">
+    <label for="hull-prizes-json">Prizes JSON: </label>
+    <textarea class='form-control input-block-level' id="hull-prizes-json" name="hull-prizes-json" rows="20" cols="30"></textarea>
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn-primary" data-hull-action="updatePrizes">Update Prize</button>
+  </div>
+</form>
+{{/isAdmin}}
+{{^isAdmin}}
+  You need to be an administrator of the current app to view this component
+{{/isAdmin}}

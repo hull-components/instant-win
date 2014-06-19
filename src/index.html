@@ -1,6 +1,5 @@
 <html>
 <head>
-  <script>window.__start__ = new Date;</script>
   <title>Hull Components - {{options.sourceName}} - version: {{options.version}}</title>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
   <style type="text/css" media="screen">
@@ -25,49 +24,10 @@
   </style>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="//hull-js.s3.amazonaws.com/{{config.version}}/hull.js"></script>
-  <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
-  <script>
-  var componentsList = {{{json components}}};
-  Hull.component('component-preview', {
-    actions: {
-      preview: function(event, action) {
-        this.previewComponent(action.data.name);
-      }
-    },
-    previewComponent: function(name) {
-      var component = componentsList[name].config || {};
-      if (component) {
-        $('.dropdown').removeClass('open');
-        $('.current-component-name').html(name);
-        var previewEl = this.$('#preview');
-        var el = $('<div/>').text('loading...');
-        $.each((component.attributes || {}), function(k, v) {
-          el.attr(k,v);
-        });
-        previewEl.html(el);
-        var def = { options: $.extend({ el: el }, (component.options || {})), name: name };
-        this.sandbox.start([def], { reset: true });
-      } else {
-        console.warn("Component: ", name, " not found");
-      }
-    },
-    render: function() {
-      var self = this, componentName = (document.location.hash || "#").slice(1);
-      if (componentsList[componentName]) {
-        setTimeout(function() {
-          self.previewComponent(componentName);
-        }, 100);
-      }
-    }
-  });
-
-  Hull.init({{{initConfig}}}, function() {
-    console.warn("Init time: ", new Date() - __start__);
-  });
-  </script>
+  <script>Hull.init({{{initConfig}}});</script>
 </head>
 <body>
-  <div  data-hull-component="component-preview">
+  <div>
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -76,22 +36,6 @@
           </a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                <span class="current-component-name">&nbsp;</span> <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                {{#each components}}
-                <li role="presentation">
-                  <a href="#{{name}}" data-target="#" role="menuitem" data-toggle="dropdown" data-hull-action="preview" data-hull-name="{{name}}">
-                    {{name}}
-                  </a>
-                </li>
-                {{/each}}
-              </ul>
-            </li>
-          </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class='login-profile' data-hull-component="login/profile@hull"></li>
           </ul>
@@ -100,16 +44,28 @@
     </div>
 
     <div class="container">
-      <ul class="nav nav-pills nav-stacked col-md-6">
-        {{#each components}}
-        <li>
-          <a href="#" data-hull-action="preview" data-hull-name="{{name}}">{{name}}</a>
-        </li>
-        {{/each}}
-      </ul>
-      <div id="preview" class="col-md-6">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+           <h3 class="panel-title">Instant Win Admin</h3>
+          </div>
+          <div class="panel-body" data-hull-component="instant-admin">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+           <h3 class="panel-title">Instant Win Game</h3>
+          </div>
+          <div class="panel-body"
+                data-hull-component="instant-game"
+                data-hull-id="{{config.components.instant-game.options.id}}">
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 </body>
 </html>

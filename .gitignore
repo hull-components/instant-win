@@ -2,6 +2,7 @@
 .grunt
 tmp
 node_modules
+bower_components
 config.json
 dist
 config.yml

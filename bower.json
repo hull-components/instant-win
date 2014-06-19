@@ -18,5 +18,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies" : {
+    "json-editor" : "0.6.16"
+  }
 }

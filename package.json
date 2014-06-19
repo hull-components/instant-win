@@ -1,9 +1,10 @@
 {
-  "name": "hull-facebook",
+  "name": "hull-instant-win",
   "hull" : {
-    "componentSourceName" : "facebook"
+    "componentSourceName" : "instant-win"
   },
   "version": "0.1.0",
+  "repository" : "https://github.com/hull-components/instant-win.git",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-watch": "0.5.3",
