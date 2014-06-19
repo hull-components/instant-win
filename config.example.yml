@@ -5,9 +5,7 @@ init:
   sources:
     default: '.'
 components:
-  game:
+  instant-game:
     options:
-      id: 
-  admin:
-    options:
-      id: 
+      id: "52f275153ca46e43dd000045"
+
