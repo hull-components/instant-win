@@ -1,3 +1,4 @@
+version: 0.8
 init:
   appId: "516d68fc28e06bb7b8000040"
   orgUrl: "https://hull-demos.hullapp.io"
