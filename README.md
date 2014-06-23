@@ -143,8 +143,8 @@ var instant = {
 };
 
 var prizes = [
-  { available_at: '2014-06-19T13:34:02.439Z', name: "Prize 1", description: 'http://image.for/my/prize-1.jpg' },
-  { available_at: '2014-06-19T15:30:05.439Z', name: "Prize 2", description: 'http://image.for/my/prize-2.jpg' }
+  { available_at: '2014-06-19T13:34:02.439Z', name: "Prize 1", description: "...", picture: 'http://image.for/my/prize-1.jpg' },
+  { available_at: '2014-06-19T15:30:05.439Z', name: "Prize 2", description: "...", picture: 'http://image.for/my/prize-2.jpg' }
 ];
 
 Hull.api.post('app/achievements', instant, function(achievement) {
