@@ -1,14 +1,14 @@
 /**
- * 
+ *
  * Edit and create Sweepstakes [Deprecated]
  *
- * @name Sweepstake 
- * @datasource {achievements} Fetches Achievements of type="InstantWin" 
+ * @name Sweepstake
+ * @datasource {achievements} Fetches Achievements of type="InstantWin"
  * @template {main} Main template
  * @example <div data-hull-component="instant-admin@hull"></div>
  */
 Hull.component({
-  
+
   templates: ['main'],
 
   datasources: {
@@ -72,7 +72,7 @@ Hull.component({
       if (description.length) { data.description = description; }
       if (secret.length) { data.secret = secret; }
 
-      this.api('app/achievements', 'post', this.signRequest(data)).done(this.sandbox.util._.bind(function(res) {
+      this.api('app/achievements', 'post', this.signRequest(data)).then(this.sandbox.util._.bind(function(res) {
         alert('Sweepstake Created');
         this.refresh();
       }, this)).fail(function() {
@@ -88,28 +88,35 @@ Hull.component({
 
       var data = { name: this.$achievementName.val() };
       if (description.length) { data.description = description; }
-      if (secret.length) { data.secret = secret; }
+      if (secret && secret.length) { data.secret = secret; }
 
-      this.api(id, 'put', this.signRequest(data)).done(function() {
+      this.api(id, 'put', this.signRequest(data)).then(function() {
         alert('Achievement Updated');
-      }).fail(function() {
+      }, function() {
         alert('Ooops... Check the form...');
       });
     },
 
     updatePrizes: function() {
-      var prizes;
+      var prizes, _ = this.sandbox.util._;
       try {
         prizes = $.parseJSON(this.$achievementPrizes.val());
       } catch (error) {
-        alert('Invalid JSON');
+        return alert('Invalid JSON');
       }
 
+      _.each(prizes.prizes || [], function (p) {
+        delete p.id;
+      });
       var id = this.$achievementsSelector.val();
-      this.api(id + '/prizes', 'put', this.signRequest(prizes)).done(function() {
-        alert('Prizes updated!');
-      }).fail(function() {
-        alert('Ooops... check your JSON...');
+      var self = this;
+      this.api.delete(id + '/prizes').then(function () {
+        self.api(id + '/prizes', 'put', self.signRequest(prizes)).then(function() {
+          self.refresh();
+        }, function(err) {
+          alert('Ooops... check your JSON...');
+          console.error(err);
+        });
       });
     },
 
