@@ -118,6 +118,34 @@ Hull.api.post(achievementId + '/achieve', function(badge) {
 
 Please not that the current user MUST be logged in to do that.
 
+#### Custom attempts
+
+You can create custom attempts by providing `attempt_token` parameter. This parameter must be a `JWT` with the `iss` and the `attempt` attributes and must be signed with the achivement secret.
+
+```javascript
+var achievementId = '52f275153ca46e43dd000045';
+var attemptToken = 'GENERATED_SERVER_SIDE';
+Hull.api.post(achievementId + '/achieve', { attempt_token: attemptToken }, function(badge) {
+  if (badge.data.winner) {
+    alert("You won a " + badge.data.prize.name);
+  } else {
+    alert("Bummer, you have lost ! Come again tomorrow...");
+  }
+});
+```
+
+To create a JWT use one of the library listed on http://jwt.io. Here is an example to create one in PHP.
+
+```php
+$token = array(
+  'iss' => 'ACHIEVEMENT_ID',
+  'attempt' => 'my_attempt'
+);
+
+// Expose $jwt to the client.
+$jwt = JWT::encode($token, 'ACHIEVEMENT_SECRET');
+```
+
 ### Get the current users' badge on this specific achievement
 
 ```javascript
