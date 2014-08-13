@@ -146,7 +146,7 @@ Hull.component({
    * @return {Boolean}
    */
   userCanPlay: function() {
-    if (!this.data.badge || !this.data.badge.attempts) { return true; }
+    if (!this.data.badge || !this.data.badge.data.attempts) { return true; }
     var d = new Date().toISOString().slice(0, 10);
     return !this.data.badge.data.attempts[d];
   },
